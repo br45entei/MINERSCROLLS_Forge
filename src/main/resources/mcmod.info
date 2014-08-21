@@ -1,0 +1,16 @@
+[
+{
+  "modid": "karrotsmuthi_minerscrolls",
+  "name": "MINERSCROLLS Reloading Minecraft (MSRM)",
+  "description": "A mod that recreates minecraft into an Elderscrolls theme. It focuses on Skyrim, the latest of the series, but includes Morrowind and oblivion. It adds new world types, randomly generates Elderscrolls-themed biomes with respective ores and building generation, and generates with the Morrowind base map.",
+  "version": "1.0",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Karrotsmuthi", "thebaum64", "Brian_Entei", "xShadoww"],
+  "credits": "None yet",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
