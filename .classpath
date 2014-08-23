@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="java"/>
-	<classpathentry kind="src" path="resources"/>
+	<classpathentry excluding="assets/karrotsmuthi_minerscrolls/lang/|assets/karrotsmuthi_minerscrolls/textures/blocks/|assets/karrotsmuthi_minerscrolls/textures/items/|assets/karrotsmuthi_minerscrolls/|assets/karrotsmuthi_minerscrolls/textures/|assets/" kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Brian_Entei/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.0.1180/forgeSrc-1.7.10-10.13.0.1180.jar" sourcepath="C:/Users/Brian_Entei/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.0.1180/forgeSrc-1.7.10-10.13.0.1180-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Brian_Entei/.gradle/caches/modules-2/files-2.1/net.minecraft/launchwrapper/1.9/116f2aad5b0c68353ebed66cd463517db6522f7e/launchwrapper-1.9.jar"/>

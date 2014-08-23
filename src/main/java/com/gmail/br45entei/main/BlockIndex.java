@@ -1,10 +1,15 @@
 package com.gmail.br45entei.main;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemStack;
 
 import com.gmail.br45entei.block.BlockModBaseBlock;
+import com.gmail.br45entei.block.BlockModBaseBlockFacing;
 import com.gmail.br45entei.block.BlockModBaseOre;
+import com.gmail.br45entei.item.ItemModBaseIngot;
+import com.gmail.br45entei.item.ItemModBaseItem;
 
 /**@author Brian_Entei */
 public class BlockIndex {
@@ -14,15 +19,11 @@ public class BlockIndex {
 	public BlockModBaseOre naturaloreQuicksilver;
 	public BlockModBaseOre naturaloreOrcichalcum;
 	public BlockModBaseOre naturaloreMoonstone;
-	public BlockModBaseOre gemoreQuicksilver;
-	public BlockModBaseOre gemoreOrcichalcum;
-	public BlockModBaseOre gemoreMoonstone;
-	public BlockModBaseOre gemoreGold;
-	public BlockModBaseOre gemoreEbony;
-	public BlockModBaseOre gemoreCorundum;
-	public BlockModBaseOre gemoreBase;
+	public BlockModBaseOre naturaloreGold;
 	public BlockModBaseOre naturaloreEbony;
 	public BlockModBaseOre naturaloreCorundum;
+	public BlockModBaseOre naturaloreIron;
+	public BlockModBaseOre naturaloreSilver;
 
 	public BlockModBaseBlock naturalstoneClaystone;
 	public BlockModBaseBlock naturalstoneMudstone;
@@ -36,20 +37,26 @@ public class BlockIndex {
 
 	public BlockModBaseBlock ingotBlockEbony;
 
+	public BlockModBaseBlock thatchBasicdark;
+	public BlockModBaseBlock thatchtiedBasiccross;
+	public BlockModBaseBlock thatchtiedBasichorizontal;
+	public BlockModBaseBlock thatchtiedSquare;
+	public BlockModBaseBlock wovenNormal;
+	public BlockModBaseBlock thatchtiedAdvanced;
+	public BlockModBaseBlock weaveAdvanced;
 
-	public final void initialize() {
-		naturaloreQuicksilver = new BlockModBaseOre("naturaloreQuicksilver");
-		naturaloreOrcichalcum = new BlockModBaseOre("naturaloreOrcichalcum");
-		naturaloreMoonstone = new BlockModBaseOre("naturaloreMoonstone");
-		gemoreQuicksilver = new BlockModBaseOre("gemoreQuicksilver");
-		gemoreOrcichalcum = new BlockModBaseOre("gemoreOrcichalcum");
-		gemoreMoonstone = new BlockModBaseOre("gemoreMoonstone");
-		gemoreGold = new BlockModBaseOre("gemoreGold");
-		gemoreEbony = new BlockModBaseOre("gemoreEbony");
-		gemoreCorundum = new BlockModBaseOre("gemoreCorundum");
-		gemoreBase = new BlockModBaseOre("gemoreBase");
-		naturaloreEbony = new BlockModBaseOre("naturaloreEbony");
-		naturaloreCorundum = new BlockModBaseOre("naturaloreCorundum");
+	public BlockModBaseBlockFacing facingBlockTest;
+
+	public final void initialize(ItemIndex itemIndex, MaterialIndex materialIndex) {
+		
+		naturaloreQuicksilver = new BlockModBaseOre("naturaloreQuicksilver").setItemDropped(itemIndex.gemoreQuicksilver).setSmeltingRecipe(new ItemStack(itemIndex.gemoreQuicksilver), 0.25F);
+		naturaloreOrcichalcum = new BlockModBaseOre("naturaloreOrcichalcum").setItemDropped(itemIndex.gemoreOrcichalcum).setSmeltingRecipe(new ItemStack(itemIndex.gemoreOrcichalcum), 0.27F);
+		naturaloreMoonstone = new BlockModBaseOre("naturaloreMoonstone").setItemDropped(itemIndex.gemoreMoonstone).setSmeltingRecipe(new ItemStack(itemIndex.gemoreMoonstone), 0.3F);
+		naturaloreGold = new BlockModBaseOre("naturaloreGold").setItemDropped(itemIndex.gemoreGold).setSmeltingRecipe(new ItemStack(itemIndex.gemoreGold), 0.32F);
+		naturaloreEbony = new BlockModBaseOre("naturaloreEbony").setItemDropped(itemIndex.gemoreEbony).setSmeltingRecipe(new ItemStack(itemIndex.gemoreEbony), 0.4F);
+		naturaloreCorundum = new BlockModBaseOre("naturaloreCorundum").setItemDropped(itemIndex.gemoreCorundum).setSmeltingRecipe(new ItemStack(itemIndex.gemoreCorundum), 0.25F);
+		naturaloreIron = new BlockModBaseOre("naturaloreIron").setItemDropped(itemIndex.gemoreIron).setSmeltingRecipe(new ItemStack(itemIndex.gemoreIron), 0.28F);
+		naturaloreSilver = new BlockModBaseOre("naturaloreSilver").setItemDropped(itemIndex.gemoreSilver).setSmeltingRecipe(new ItemStack(itemIndex.gemoreSilver), 0.37F);
 
 		naturalstoneClaystone = new BlockModBaseBlock("naturalstoneClaystone");
 		naturalstoneMudstone = new BlockModBaseBlock("naturalstoneMudstone");
@@ -61,7 +68,17 @@ public class BlockIndex {
 		stoneSmoothhorizontalsiltstone = new BlockModBaseBlock("stoneSmoothhorizontalsiltstone");
 		stoneSmoothshalestone = new BlockModBaseBlock("stoneSmoothshalestone");
 
-		ingotBlockEbony = new BlockModBaseBlock("ingotBlockEbony").setIngotBlock(ToolMaterial.EMERALD);
+		ingotBlockEbony = new BlockModBaseBlock("ingotBlockEbony").setIngotBlock(materialIndex.toolMaterials.EBONY).setItemDropped(itemIndex.ingotEbony, 9);
+
+		thatchBasicdark = new BlockModBaseBlock("thatchBasicdark").setGrassBlock();
+		thatchtiedBasiccross = new BlockModBaseBlock("thatchtiedBasiccross").setGrassBlock();
+		thatchtiedBasichorizontal = new BlockModBaseBlock("thatchtiedBasichorizontal").setGrassBlock();
+		thatchtiedSquare = new BlockModBaseBlock("thatchtiedSquare").setGrassBlock();
+		wovenNormal = new BlockModBaseBlock("wovenNormal").setGrassBlock();
+		thatchtiedAdvanced = new BlockModBaseBlock("thatchtiedAdvanced").setGrassBlock();
+		weaveAdvanced = new BlockModBaseBlock("weaveAdvanced").setGrassBlock();
+
+		facingBlockTest = new BlockModBaseBlockFacing("facingBlockTest").setDirtBlock();
 	}
 
 }

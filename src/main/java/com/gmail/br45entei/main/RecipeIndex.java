@@ -1,5 +1,8 @@
 package com.gmail.br45entei.main;
 
+import com.gmail.br45entei.item.ItemModBaseIngot;
+
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -15,11 +18,18 @@ public class RecipeIndex {
 		System.err.println("Recipe Test");
 	}
 
-	@SuppressWarnings("boxing")
+	//@SuppressWarnings("boxing")
 	public final void initialize() {
-		GameRegistry.addRecipe(new ItemStack(Item.getItemFromBlock(blockIndex.ingotBlockEbony)), new Object[]{"XXX", "XXX", "XXX", 'X', itemIndex.ingotEbony});
+		this.addIngotRecipe(blockIndex.ingotBlockEbony, itemIndex.ingotEbony, 9);
+
 		
-		
+
+	}
+
+	@SuppressWarnings("boxing")
+	public final void addIngotRecipe(Block block, Item item, int itemAmount) {
+		GameRegistry.addRecipe(new ItemStack(block), new Object[] {"###", "###", "###", '#', new ItemStack(item)});
+		GameRegistry.addRecipe(new ItemStack(item, itemAmount), new Object[] {"#", '#', block});
 	}
 
 }

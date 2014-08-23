@@ -22,7 +22,7 @@ public class ItemModBaseToolBase extends ItemTool {
 		super(p_i45333_1_, p_i45333_2_, p_i45333_3_);
 		this.CodeName = CodeName;
 		this.maxStackSize = 1;
-		this.setCreativeTab(CreativeTabs.tabTools).setUnlocalizedName(Constants.MODID + "_" + CodeName).setTextureName(CodeName);
+		this.setCreativeTab(CreativeTabs.tabTools).setUnlocalizedName(Constants.MODID + "_" + CodeName).setTextureName(Constants.MODID + ":" + CodeName);
 		GameRegistry.registerItem(this, CodeName);
 	}
 

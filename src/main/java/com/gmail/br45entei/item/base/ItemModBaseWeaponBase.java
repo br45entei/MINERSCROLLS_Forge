@@ -1,5 +1,7 @@
 package com.gmail.br45entei.item.base;
 
+import com.gmail.br45entei.main.lib.Constants;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -17,7 +19,7 @@ public class ItemModBaseWeaponBase extends ItemSword {
 		super(p_i45356_1_);
 		this.CodeName = CodeName;
 		this.maxStackSize = 1;
-		this.setCreativeTab(CreativeTabs.tabCombat).setUnlocalizedName(CodeName).setTextureName(CodeName);
+		this.setCreativeTab(CreativeTabs.tabCombat).setUnlocalizedName(Constants.MODID + "_" + CodeName).setTextureName(Constants.MODID + ":" + CodeName);
 		GameRegistry.registerItem(this, CodeName);
 	}
 

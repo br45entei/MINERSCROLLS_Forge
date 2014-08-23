@@ -2,6 +2,7 @@ package com.gmail.br45entei.item.base;
 
 import java.util.Set;
 
+import com.gmail.br45entei.main.lib.Constants;
 import com.google.common.collect.Sets;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -23,7 +24,7 @@ public class ItemModBasePickaxeBase extends ItemPickaxe {
 		super(p_i45347_1_);
 		this.CodeName = CodeName;
 		this.maxStackSize = 1;
-		this.setCreativeTab(CreativeTabs.tabTools).setUnlocalizedName(CodeName).setTextureName(CodeName);
+		this.setCreativeTab(CreativeTabs.tabTools).setUnlocalizedName(Constants.MODID + "_" + CodeName).setTextureName(Constants.MODID + ":" + CodeName);
 		GameRegistry.registerItem(this, CodeName);
 	}
 
