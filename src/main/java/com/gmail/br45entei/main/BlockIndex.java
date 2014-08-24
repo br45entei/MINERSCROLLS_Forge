@@ -6,10 +6,11 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 
 import com.gmail.br45entei.block.BlockModBaseBlock;
-import com.gmail.br45entei.block.BlockModBaseBlockFacing;
+import com.gmail.br45entei.block.BlockModBaseBlockMultiTextured;
 import com.gmail.br45entei.block.BlockModBaseOre;
 import com.gmail.br45entei.item.ItemModBaseIngot;
 import com.gmail.br45entei.item.ItemModBaseItem;
+import com.gmail.br45entei.main.lib.Constants;
 
 /**@author Brian_Entei */
 public class BlockIndex {
@@ -45,7 +46,7 @@ public class BlockIndex {
 	public BlockModBaseBlock thatchtiedAdvanced;
 	public BlockModBaseBlock weaveAdvanced;
 
-	public BlockModBaseBlockFacing facingBlockTest;
+	public BlockModBaseBlockMultiTextured facingBlockTest;
 
 	public final void initialize(ItemIndex itemIndex, MaterialIndex materialIndex) {
 		
@@ -78,7 +79,7 @@ public class BlockIndex {
 		thatchtiedAdvanced = new BlockModBaseBlock("thatchtiedAdvanced").setGrassBlock();
 		weaveAdvanced = new BlockModBaseBlock("weaveAdvanced").setGrassBlock();
 
-		facingBlockTest = new BlockModBaseBlockFacing("facingBlockTest").setDirtBlock();
+		facingBlockTest = new BlockModBaseBlockMultiTextured("facingBlockTest").setDirtBlock().setIsMultiTextured(true).setCanSideChangeToPlayerView(true);
 	}
 
 }

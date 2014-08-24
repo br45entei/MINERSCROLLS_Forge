@@ -1,4 +1,6 @@
 tile.karrotsmuthi_minerscrolls_facingBlockTest.name=Facing Block Test
+tile.karrotsmuthi_minerscrolls_facingBlockPlaceTest.name=Facing Block Place Test
+item.karrotsmuthi_minerscrolls_testPickaxe.name=Testing Pickaxe
 
 tile.karrotsmuthi_minerscrolls_naturaloreQuicksilver.name=Quicksilver Ore
 tile.karrotsmuthi_minerscrolls_naturaloreOrcichalcum.name=Orcichalcum Ore
