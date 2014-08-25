@@ -113,30 +113,35 @@ public class BlockModBaseOre extends BlockModBaseBlock {
 
 	public BlockModBaseOre setOreBlock() {
 		this.setHardness(3.0F).setResistance(5.0F).setStepSound(soundTypePiston);
+		this.setHarvestLevel("pickaxe", 1);
 		return this;
 	}
 
 	@Override
-	public BlockModBaseOre setStoneBlock() {
+	public BlockModBaseBlock setStoneBlock() {
 		this.setHardness(1.5F).setResistance(10.0F).setStepSound(soundTypePiston);
+		this.setHarvestLevel("pickaxe", 0);
 		return this;
 	}
 
 	@Override
-	public BlockModBaseOre setGrassBlock() {
+	public BlockModBaseBlock setGrassBlock() {
 		this.setHardness(0.6F).setStepSound(soundTypeGrass);
+		this.setHarvestLevel("shovel", 0);
 		return this;
 	}
 
 	@Override
-	public BlockModBaseOre setDirtBlock() {
+	public BlockModBaseBlock setDirtBlock() {
 		this.setHardness(0.5F).setStepSound(soundTypeGravel);
+		this.setHarvestLevel("shovel", 0);
 		return this;
 	}
 
 	@Override
-	public BlockModBaseOre setWoodBlock() {
+	public BlockModBaseBlock setWoodBlock() {
 		this.setHardness(2.5F).setStepSound(soundTypeWood);
+		this.setHarvestLevel("axe", 0);
 		return this;
 	}
 

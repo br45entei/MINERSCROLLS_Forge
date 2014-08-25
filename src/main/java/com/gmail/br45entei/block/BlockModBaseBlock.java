@@ -1,8 +1,12 @@
 package com.gmail.br45entei.block;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import com.gmail.br45entei.item.ItemModBaseIngot;
+import com.gmail.br45entei.main.FurnaceFuel;
+import com.gmail.br45entei.main.RecipeIndex;
 import com.gmail.br45entei.main.lib.Constants;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -13,9 +17,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.ForgeHooks;
 
 /**
  * @author Brian_Entei
@@ -23,7 +30,9 @@ import net.minecraft.item.Item.ToolMaterial;
  */
 public class BlockModBaseBlock extends Block {
 	public String CodeName;
+	public ItemStack ingotItem;
 	public Item itemDropped;
+	public boolean isIngotBlock;
 	public int amountDropped = 1;
 
 	public BlockModBaseBlock(String CodeName) {
@@ -76,30 +85,54 @@ public class BlockModBaseBlock extends Block {
 		return this;
 	}
 
-	public BlockModBaseBlock setIngotBlock(ToolMaterial material) {
-		if(material.equals(ToolMaterial.IRON) || material.equals(ToolMaterial.EMERALD) || material.name().equals("EBONY")) {
-			this.setHardness(5.0F).setResistance(10.0F).setStepSound(soundTypeMetal);
+	public BlockModBaseBlock setCanBeFurnaceFuel(boolean canBeFurnaceFuel, int burnTime) {
+		if(canBeFurnaceFuel) {
+			FurnaceFuel.addBurnableItem(new ItemStack(this), burnTime);
+		} else {
+			FurnaceFuel.removeBurnableItem(new ItemStack(this));
 		}
 		return this;
 	}
 
+	@Override
+	public boolean isBeaconBase(IBlockAccess worldObj, int x, int y, int z, int beaconX, int beaconY, int beaconZ) {
+		return this.isIngotBlock;
+	}
+
+	public BlockModBaseBlock setIngotBlock(ItemStack itemStack, int harvestLevel) {
+		this.ingotItem = itemStack;
+		this.setHardness(5.0F).setResistance(10.0F).setStepSound(soundTypeMetal);
+		RecipeIndex.addIngotRecipe(this, this.ingotItem.getItem(), this.ingotItem.stackSize);
+		this.setHarvestLevel("pickaxe", harvestLevel);
+		this.isIngotBlock = true;
+		return this;
+	}
+
+	public BlockModBaseBlock setIngotBlock(ItemStack itemStack) {
+		return this.setIngotBlock(itemStack, 1);
+	}
+
 	public BlockModBaseBlock setStoneBlock() {
 		this.setHardness(1.5F).setResistance(10.0F).setStepSound(soundTypePiston);
+		this.setHarvestLevel("pickaxe", 0);
 		return this;
 	}
 
 	public BlockModBaseBlock setGrassBlock() {
 		this.setHardness(0.6F).setStepSound(soundTypeGrass);
+		this.setHarvestLevel("shovel", 0);
 		return this;
 	}
 
 	public BlockModBaseBlock setDirtBlock() {
 		this.setHardness(0.5F).setStepSound(soundTypeGravel);
+		this.setHarvestLevel("shovel", 0);
 		return this;
 	}
 
 	public BlockModBaseBlock setWoodBlock() {
 		this.setHardness(2.5F).setStepSound(soundTypeWood);
+		this.setHarvestLevel("axe", 0);
 		return this;
 	}
 

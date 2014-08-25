@@ -34,15 +34,29 @@ public class BlockIndex {
 	public BlockModBaseBlock stoneSmoothhorizontalmudstone;
 	public BlockModBaseBlock stoneSmoothhorizontalshalestone;
 	public BlockModBaseBlock stoneSmoothhorizontalsiltstone;
-	public BlockModBaseBlock stoneSmoothshalestone;
 
-	public BlockModBaseBlock ingotBlockEbony;
+	public BlockModBaseBlock smoothshalestone;
+	public BlockModBaseBlock smoothMudstone;
+	public BlockModBaseBlock smoothSiltstone;
+	public BlockModBaseBlock smoothClaystone;
+
+
+	public BlockModBaseBlock blockCorundum;
+	public BlockModBaseBlock blockDwarven;
+	public BlockModBaseBlock blockEbony;
+	public BlockModBaseBlock blockGold;
+	public BlockModBaseBlock blockIron;
+	public BlockModBaseBlock blockMoonstone;
+	public BlockModBaseBlock blockOrcichalcum;
+	public BlockModBaseBlock blockQuicksilver;
+	public BlockModBaseBlock blockRefinedMalachite;
+	public BlockModBaseBlock blockSilver;
+	public BlockModBaseBlock blockSteel;
 
 	public BlockModBaseBlock thatchBasicdark;
 	public BlockModBaseBlock thatchtiedBasiccross;
 	public BlockModBaseBlock thatchtiedBasichorizontal;
 	public BlockModBaseBlock thatchtiedSquare;
-	public BlockModBaseBlock wovenNormal;
 	public BlockModBaseBlock thatchtiedAdvanced;
 	public BlockModBaseBlock weaveAdvanced;
 
@@ -67,19 +81,33 @@ public class BlockIndex {
 		stoneSmoothhorizontalmudstone = new BlockModBaseBlock("stoneSmoothhorizontalmudstone");
 		stoneSmoothhorizontalshalestone = new BlockModBaseBlock("stoneSmoothhorizontalshalestone");
 		stoneSmoothhorizontalsiltstone = new BlockModBaseBlock("stoneSmoothhorizontalsiltstone");
-		stoneSmoothshalestone = new BlockModBaseBlock("stoneSmoothshalestone");
 
-		ingotBlockEbony = new BlockModBaseBlock("ingotBlockEbony").setIngotBlock(materialIndex.toolMaterials.EBONY).setItemDropped(itemIndex.ingotEbony, 9);
+		smoothshalestone = new BlockModBaseBlock("smoothshalestone");
+		smoothMudstone = new BlockModBaseBlock("smoothMudstone");
+		smoothSiltstone = new BlockModBaseBlock("smoothSiltstone");
+		smoothClaystone = new BlockModBaseBlock("smoothClaystone");
 
-		thatchBasicdark = new BlockModBaseBlock("thatchBasicdark").setGrassBlock();
-		thatchtiedBasiccross = new BlockModBaseBlock("thatchtiedBasiccross").setGrassBlock();
-		thatchtiedBasichorizontal = new BlockModBaseBlock("thatchtiedBasichorizontal").setGrassBlock();
-		thatchtiedSquare = new BlockModBaseBlock("thatchtiedSquare").setGrassBlock();
-		wovenNormal = new BlockModBaseBlock("wovenNormal").setGrassBlock();
-		thatchtiedAdvanced = new BlockModBaseBlock("thatchtiedAdvanced").setGrassBlock();
-		weaveAdvanced = new BlockModBaseBlock("weaveAdvanced").setGrassBlock();
 
-		facingBlockTest = new BlockModBaseBlockMultiTextured("facingBlockTest").setDirtBlock().setIsMultiTextured(true).setCanSideChangeToPlayerView(true);
+		blockCorundum = new BlockModBaseBlock("blockCorundum").setIngotBlock(new ItemStack(itemIndex.ingotCorundum, 9));
+		blockDwarven = new BlockModBaseBlock("blockDwarven").setIngotBlock(new ItemStack(itemIndex.ingotspecialDwarven, 9));
+		blockEbony = new BlockModBaseBlock("blockEbony").setIngotBlock(new ItemStack(itemIndex.ingotEbony, 9));
+		blockGold = new BlockModBaseBlock("blockGold").setIngotBlock(new ItemStack(itemIndex.ingotGold, 9));
+		blockIron = new BlockModBaseBlock("blockIron").setIngotBlock(new ItemStack(itemIndex.ingotIron, 9));
+		blockMoonstone = new BlockModBaseBlock("blockMoonstone").setIngotBlock(new ItemStack(itemIndex.ingotMoonstone, 9));
+		blockOrcichalcum = new BlockModBaseBlock("blockOrcichalcum").setIngotBlock(new ItemStack(itemIndex.ingotOrcichalcum, 9));
+		blockQuicksilver = new BlockModBaseBlock("blockQuicksilver").setIngotBlock(new ItemStack(itemIndex.ingotQuicksilver, 9));
+		blockRefinedMalachite = new BlockModBaseBlock("blockRefinedMalachite").setIngotBlock(new ItemStack(itemIndex.ingotrefinedMalachite, 9));
+		blockSilver = new BlockModBaseBlock("blockSilver").setIngotBlock(new ItemStack(itemIndex.ingotSilver, 9));
+		blockSteel = new BlockModBaseBlock("blockSteel").setIngotBlock(new ItemStack(itemIndex.ingotSteel, 9));
+
+		thatchBasicdark = new BlockModBaseBlock("thatchBasicdark").setGrassBlock().setCanBeFurnaceFuel(true, 200);
+		thatchtiedBasiccross = new BlockModBaseBlock("thatchtiedBasiccross").setGrassBlock().setCanBeFurnaceFuel(true, 200);
+		thatchtiedBasichorizontal = new BlockModBaseBlock("thatchtiedBasichorizontal").setGrassBlock().setCanBeFurnaceFuel(true, 200);
+		thatchtiedSquare = new BlockModBaseBlock("thatchtiedSquare").setGrassBlock().setCanBeFurnaceFuel(true, 200);
+		thatchtiedAdvanced = new BlockModBaseBlock("thatchtiedAdvanced").setGrassBlock().setCanBeFurnaceFuel(true, 200);
+		weaveAdvanced = new BlockModBaseBlock("weaveAdvanced").setGrassBlock().setCanBeFurnaceFuel(true, 200);
+
+		facingBlockTest = new BlockModBaseBlockMultiTextured("facingBlockTest").initialize().setDirtBlock().setIsMultiTextured(true).setCanSideChangeToPlayerView(true);
 	}
 
 }

@@ -23,15 +23,20 @@ public class GeneratorIndex {
 	public BlockGenerator naturaloreOrcichalcumGen;
 	public BlockGenerator naturaloreMoonstoneGen;
 	public BlockGenerator naturaloreEbonyGen;
+	public BlockGenerator naturaloreIronGen;
 	public BlockGenerator naturaloreCorundumGen;
+	public BlockGenerator naturaloreGoldGen;
+	public BlockGenerator naturaloreSilverGen;
 
 	public final void initialize() {
 		this.naturaloreQuicksilverGen = new BlockGenerator(this.blockIndex.naturaloreQuicksilver).initialize(10);
 		this.naturaloreOrcichalcumGen = new BlockGenerator(this.blockIndex.naturaloreOrcichalcum).initialize(10);
 		this.naturaloreMoonstoneGen = new BlockGenerator(this.blockIndex.naturaloreMoonstone).initialize(10);
 		this.naturaloreEbonyGen = new BlockGenerator(this.blockIndex.naturaloreEbony).initialize(10);
+		this.naturaloreIronGen = new BlockGenerator(this.blockIndex.naturaloreIron).initialize(10);
 		this.naturaloreCorundumGen = new BlockGenerator(this.blockIndex.naturaloreCorundum).initialize(10);
-		
+		this.naturaloreGoldGen = new BlockGenerator(this.blockIndex.naturaloreGold).initialize(10);
+		this.naturaloreSilverGen = new BlockGenerator(this.blockIndex.naturaloreSilver).initialize(10);
 	}
 
 	public final class BlockGenerator implements IWorldGenerator {

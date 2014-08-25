@@ -3,14 +3,17 @@
  */
 package com.gmail.br45entei.block;
 
+import java.util.List;
 import java.util.Random;
 
+import com.gmail.br45entei.main.RecipeIndex;
 import com.gmail.br45entei.main.lib.Constants;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,12 +23,18 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 
 /**
  * @author Brian_Entei
  *
  */
 public class BlockModBaseBlockMultiTextured extends BlockModBaseBlock {
+	private boolean initialized = false;
+	public BlockModBaseBlockMultiTextured initialize() {
+		this.initialized = true;
+		return this;
+	}
 
 	public BlockModBaseBlockMultiTextured(String CodeName) {
 		super(CodeName);
@@ -78,34 +87,44 @@ public class BlockModBaseBlockMultiTextured extends BlockModBaseBlock {
 	}
 
 	@Override
-	public BlockModBaseBlockMultiTextured setIngotBlock(ToolMaterial material) {
-		if(material.equals(ToolMaterial.IRON) || material.equals(ToolMaterial.EMERALD) || material.name().equals("EBONY")) {
-			this.setHardness(5.0F).setResistance(10.0F).setStepSound(soundTypeMetal);
-		}
+	public BlockModBaseBlockMultiTextured setIngotBlock(ItemStack itemStack, int harvestLevel) {
+		this.ingotItem = itemStack;
+		this.setHardness(5.0F).setResistance(10.0F).setStepSound(soundTypeMetal);
+		RecipeIndex.addIngotRecipe(this, this.ingotItem.getItem(), this.ingotItem.stackSize);
+		this.setHarvestLevel("pickaxe", harvestLevel);
 		return this;
+	}
+
+	@Override
+	public BlockModBaseBlockMultiTextured setIngotBlock(ItemStack itemStack) {
+		return this.setIngotBlock(itemStack, 1);
 	}
 
 	@Override
 	public BlockModBaseBlockMultiTextured setStoneBlock() {
 		this.setHardness(1.5F).setResistance(10.0F).setStepSound(soundTypePiston);
+		this.setHarvestLevel("pickaxe", 0);
 		return this;
 	}
 
 	@Override
-	public BlockModBaseBlockMultiTextured setGrassBlock() {
+	public BlockModBaseBlock setGrassBlock() {
 		this.setHardness(0.6F).setStepSound(soundTypeGrass);
+		this.setHarvestLevel("shovel", 0);
 		return this;
 	}
 
 	@Override
 	public BlockModBaseBlockMultiTextured setDirtBlock() {
 		this.setHardness(0.5F).setStepSound(soundTypeGravel);
+		this.setHarvestLevel("shovel", 0);
 		return this;
 	}
 
 	@Override
 	public BlockModBaseBlockMultiTextured setWoodBlock() {
 		this.setHardness(2.5F).setStepSound(soundTypeWood);
+		this.setHarvestLevel("axe", 0);
 		return this;
 	}
 
@@ -162,7 +181,7 @@ public class BlockModBaseBlockMultiTextured extends BlockModBaseBlock {
 		return this;
 	}
 
-	@SideOnly(Side.CLIENT)
+	/*@SideOnly(Side.CLIENT)
 	protected IIcon north;
 	@SideOnly(Side.CLIENT)
 	protected IIcon south;
@@ -173,19 +192,49 @@ public class BlockModBaseBlockMultiTextured extends BlockModBaseBlock {
 	@SideOnly(Side.CLIENT)
 	protected IIcon west;
 	@SideOnly(Side.CLIENT)
-	protected IIcon east;
+	protected IIcon east;*/
+
+	@SideOnly(Side.CLIENT)
+	protected IIcon[] sides;
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		this.blockIcon = iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName);
-		this.bottom = iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_bottom");
-		this.top = iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_top");
-		this.south = iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_south");
-		this.north = iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_north");
-		this.east = iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_east");
-		this.west = iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_west");
+		/*this.bottom = thisiconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_bottom");
+		/*this.top = iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_top");
+		/*this.south = iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_south");
+		/*this.north = iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_north");
+		/*this.east = iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_east");
+		/*this.west = iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_west");*/
+		this.sides = new IIcon[] {
+				iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_bottom"),
+				iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_top"),
+				iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_north"),
+				iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_south"),
+				iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_west"),
+				iconRegister.registerIcon(Constants.MODID + ":" + this.CodeName + "_east")
+		};
 		System.err.println("Registered block icons for block \"" + this.CodeName + "\".");
+	}
+
+	public String getUnlocalizedName(ItemStack stack) {
+		switch(stack.getItemDamage()) {
+		case 0:
+			return this.getUnlocalizedName() + "_bottom";
+		case 1:
+			return this.getUnlocalizedName() + "_top";
+		case 2:
+			return this.getUnlocalizedName() + "_north";
+		case 3:
+			return this.getUnlocalizedName() + "_south";
+		case 4:
+			return this.getUnlocalizedName() + "_west";
+		case 5:
+			return this.getUnlocalizedName() + "_east";
+		default:
+			return this.getUnlocalizedName();
+		}
 	}
 
 	@Override
@@ -202,73 +251,67 @@ public class BlockModBaseBlockMultiTextured extends BlockModBaseBlock {
 	@Override
 	public IIcon getIcon(int side, int meta) {
 		if(!this.canChangeSides) {
-			switch(side) {
-				case 0 : return bottom;
-				case 1 : return top;
-				case 2 : return north;
-				case 3 : return south;
-				case 4 : return west;
-				case 5 : return east;
-			}
-		} else {
-			switch(meta) {
-				case 0 :
-					switch(side) {
-						case 0 : return top;
-						case 1 : return bottom;
-						case 2 : return south;
-						case 3 : return north;
-						case 4 : return west;
-						case 5 : return east;
-					}
-				case 1 :
-					switch(side) {
-						case 0 : return bottom;
-						case 1 : return top;
-						case 2 : return north;
-						case 3 : return south;
-						case 4 : return west;
-						case 5 : return east;
-					}
-				case 2 :
-					switch(side) {
-						case 0 : return south;
-						case 1 : return north;
-						case 2 : return top;
-						case 3 : return bottom;
-						case 4 : return east;
-						case 5 : return west;
-					}
-				case 3 :
-					switch(side) {
-						case 0 : return south;
-						case 1 : return north;
-						case 2 : return bottom;
-						case 3 : return top;
-						case 4 : return west;
-						case 5 : return east;
-					}
-				case 4 :
-					switch(side) {
-						case 0 : return south;
-						case 1 : return north;
-						case 2 : return west;
-						case 3 : return east;
-						case 4 : return top;
-						case 5 : return bottom;
-					}
-				case 5 :
-					switch(side) {
-						case 0 : return south;
-						case 1 : return north;
-						case 2 : return east;
-						case 3 : return west;
-						case 4 : return bottom;
-						case 5 : return top;
-					}
-			}
+			return this.sides[side];
 		}
+		switch(meta) {
+			case 0 :
+				switch(side) {
+					case 0 : return this.sides[1];
+					case 1 : return this.sides[0];
+					case 2 : return this.sides[3];
+					case 3 : return this.sides[2];
+					case 4 : return this.sides[4];
+					case 5 : return this.sides[5];
+				}
+			case 1 :
+				return this.sides[side];
+			case 2 :
+				switch(side) {
+					case 0 : return this.sides[3];
+					case 1 : return this.sides[2];
+					case 2 : return this.sides[1];
+					case 3 : return this.sides[0];
+					case 4 : return this.sides[5];
+					case 5 : return this.sides[4];
+				}
+			case 3 :
+				switch(side) {
+					case 0 : return this.sides[3];
+					case 1 : return this.sides[2];
+					case 2 : return this.sides[0];
+					case 3 : return this.sides[1];
+					case 4 : return this.sides[4];
+					case 5 : return this.sides[5];
+				}
+			case 4 :
+				switch(side) {
+					case 0 : return this.sides[3];
+					case 1 : return this.sides[2];
+					case 2 : return this.sides[4];
+					case 3 : return this.sides[5];
+					case 4 : return this.sides[1];
+					case 5 : return this.sides[0];
+				}
+			case 5 :
+				switch(side) {
+					case 0 : return this.sides[3];
+					case 1 : return this.sides[2];
+					case 2 : return this.sides[5];
+					case 3 : return this.sides[4];
+					case 4 : return this.sides[0];
+					case 5 : return this.sides[1];
+				}
+		}
+		System.err.println("int side: \"" + side + "\"; int meta: \"" + meta + "\" was not registered for the block \"" + this.getUnlocalizedName() + "\"!");
 		return blockIcon;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
+		for(int i = 0; i < 6; i ++) {
+			list.add(new ItemStack(item, 1, i));
+		}
 	}
 
 	@Override
